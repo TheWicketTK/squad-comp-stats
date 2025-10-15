@@ -27,7 +27,7 @@ Posts match scoreboard CSV files ( When having the OSI mod install on your Squad
 
 ---
 
-## APIEOSLink - For Squad Compification
+## Link plugin - For Squad Compification
 
 ### Params
 
