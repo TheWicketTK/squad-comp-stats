@@ -53,8 +53,12 @@ Before you begin, make sure you have:
      ]
    }
    ```
+> 💡 **Tip:** The scoreboard path may vary depending on your mod or server setup.
+> Update the `"scoreboardPath"` in your config to match where your server saves the CSV files.   
 
 3. **Restart SquadJS** to apply the changes.
+
+
 
 ---
 
@@ -74,7 +78,7 @@ The **SquadCompificationLink** plugin requires an API key to communicate with th
 ## 🧾 Supported Mods for Scoreboard Exports
 
 > ⚠️ These mods are **only required** for the **DiscordScoreboard** plugin.
-> The **SquadCompificationLink** plugin (EOS linking) works **independently** and is fully supported on **vanilla servers** (such as *Vinalia*).
+> The **SquadCompificationLink** plugin (EOS linking) works **independently** and is fully supported on **vanilla layers**.
 
 | Mod Name                                  | Description                                                                         | Link                                                                                                            |
 | ----------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
@@ -82,5 +86,3 @@ The **SquadCompificationLink** plugin requires an API key to communicate with th
 | **Competitive Squad Modpack**             | Community-driven modpack for organized play. Includes automatic scoreboard exports. | [Steam Workshop › Competitive Squad Modpack](https://steamcommunity.com/sharedfiles/filedetails/?id=3561863613) |
 | **Comp Skirmish (with `_caster` layers)** | Training/scrim mod that supports scoreboard export (layers ending with `_caster`).  | [Steam Workshop › Comp Skirmish](https://steamcommunity.com/sharedfiles/filedetails/?id=3294562930)             |
 
-> 💡 **Tip:** The scoreboard path may vary depending on your mod or server setup.
-> Update the `"scoreboardPath"` in your config to match where your server saves the CSV files.
