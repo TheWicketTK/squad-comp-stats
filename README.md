@@ -10,10 +10,10 @@ This guide explains how to install, configure, and use the **DiscordScoreboard**
 
 Before you begin, make sure you have:
 
-* ✅ A working [**SquadJS**](https://github.com/Team-Silver-Sphere/SquadJS) installation connected to your game server.
+* ✅ [**SquadJS**](https://github.com/Team-Silver-Sphere/SquadJS) installation connected to your server.
 * 🤖 A **Discord bot token** with permission to send messages in your desired channel.
-* 📁 For scoreboard uploads — a **supported mod** (see [Supported Mods](#supported-mods)).
-* 🔑 For EOS player linking — an **API key** from [Squad Competification](https://discord.gg/TTQTnXfRAc).
+* 📁 For scoreboard uploads - a **supported mod** layer must be played on (see [Supported Mods](#supported-mods)).
+* 🔑 For EOS player linking - an **API key** from [Squad Competification](https://discord.gg/TTQTnXfRAc).
 
 ---
 
