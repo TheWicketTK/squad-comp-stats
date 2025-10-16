@@ -1,183 +1,86 @@
+# 🧩 Installing SquadJS Plugins
 
+### *DiscordScoreboard* & *SquadCompificationLink*
 
-# Installing the SquadJS Plugins
-
-This guide explains how to install and configure the **DiscordScoreboard** and **SquadCompificationLink** plugins for **SquadJS**.
-
----
-
-## 1) Prerequisites
-
-* **SquadJS** installed (Node.js 18+ recommended).
-* A **Discord bot token** with permission to send messages in your chosen channel.
-* For **scoreboard uploads**, a supported **mod** (see section 5).
-* For **EOS player linking**, no mod dependencies - it also works on **Vinalia** and other standard Squad servers.
+This guide explains how to install, configure, and use the **DiscordScoreboard** and **SquadCompificationLink** plugins with **SquadJS**.
 
 ---
 
-## 2) Place the plugin files
+## ⚙️ Prerequisites
 
-1. SSH into your SquadJS server and navigate to your install directory, e.g.:
+Before you begin, make sure you have:
 
-   ```bash
-   cd /opt/squadjs
-   ```
+* ✅ A working [**SquadJS**](https://github.com/Team-Silver-Sphere/SquadJS) installation connected to your game server.
+* 🤖 A **Discord bot token** with permission to send messages in your desired channel.
+* 📁 For scoreboard uploads — a **supported mod** (see [Supported Mods](#supported-mods)).
+* 🔑 For EOS player linking — an **API key** from [Squad Competification](https://discord.gg/TTQTnXfRAc).
 
-2. Copy both plugin files into the `plugins` folder:
+---
+
+## 📥 Installation
+
+1. **Copy the plugin files** into your SquadJS plugins folder:
 
    ```
-   /opt/squadjs/plugins/DiscordScoreboard.js
-   /opt/squadjs/plugins/SquadCompificationLink.js
+   /squad-server/plugins/discord-scoreboard.js
+   /squad-server/plugins/squad-competification-link.js
    ```
 
-> If your setup uses folders per plugin, you can also use:
->
-> ```
-> /opt/squadjs/plugins/discord-scoreboard/index.js
-> /opt/squadjs/plugins/squad-compification-link/index.js
-> ```
+
+
+2. Open you `config.json` **Add both plugins** to the `plugins` array and fill in your details:
+
+   ```json
+   {
+     "plugins": [
+       {
+         "plugin": "DiscordScoreboard",
+         "enabled": true,
+         "discordClient": "discord",
+         "channelID": "123456789012345678",
+         "scoreboardPath": "/home/squad/Scoreboards/",
+         "waitTime": 5000
+       },
+       {
+         "plugin": "SquadCompificationLink",
+         "enabled": true,
+         "apiEndpoint": "https://squad.competification.com/api-squad/eoslink",
+         "apiToken": "YOUR_API_TOKEN",
+         "timeout": 5000,
+         "retryOnFailure": true,
+         "logSuccessful": true
+       }
+     ]
+   }
+   ```
+
+3. **Restart SquadJS** to apply the changes.
 
 ---
 
-## 3) Configure SquadJS
+## 🔑 Getting Your API Key
 
-Open your configuration file — usually located at:
+The **SquadCompificationLink** plugin requires an API key to communicate with the **Squad Competification** platform.
 
-```
-/opt/squadjs/config/config.json
-```
+1. Join the **official Squad Competification Discord**:
+   🔗 [https://discord.gg/TTQTnXfRAc](https://discord.gg/TTQTnXfRAc)
 
-### 3.1 Add or verify Discord connector
+2. Once you’ve joined, **open a support ticket or message a developer** to request your **API key**.
 
-```json
-{
-  "connectors": {
-    "discord": {
-      "token": "YOUR_DISCORD_BOT_TOKEN",
-      "intents": ["Guilds", "GuildMessages", "MessageContent"]
-    }
-  }
-}
-```
-
-### 3.2 Add both plugins to the `plugins` array
-
-Replace placeholders with your actual details:
-
-```json
-{
-  "plugins": [
-    {
-      "plugin": "DiscordScoreboard",
-      "enabled": true,
-      "discordClient": "discord",
-      "channelID": "123456789012345678",
-      "scoreboardPath": "/home/squad/Scoreboards/",
-      "waitTime": 5000
-    },
-    {
-      "plugin": "SquadCompificationLink",
-      "enabled": true,
-      "apiEndpoint": "https://squad.competification.com/api-squad/eoslink",
-      "apiToken": "YOUR_API_TOKEN",
-      "timeout": 5000,
-      "retryOnFailure": true,
-      "logSuccessful": true
-    }
-  ]
-}
-```
+3. You’ll receive a unique `apiToken` copy it into your plugin configuration under `"apiToken"`.
 
 ---
 
-## 4) Obtain Your API Key
+## 🧾 Supported Mods for Scoreboard Exports
 
-To use the **SquadCompificationLink** plugin, you’ll need an API token.
+> ⚠️ These mods are **only required** for the **DiscordScoreboard** plugin.
+> The **SquadCompificationLink** plugin (EOS linking) works **independently** and is fully supported on **vanilla servers** (such as *Vinalia*).
 
-➡️ **Join the official Squad Competification Discord:**
-🔗 [https://discord.gg/TTQTnXfRAc](https://discord.gg/TTQTnXfRAc)
+| Mod Name                                  | Description                                                                         | Link                                                                                                            |
+| ----------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **New Caster UI / OSI Scoreboard System** | Provides a live scoreboard and saves CSV data at the end of each round.             | *(Bundled with most competitive servers)*                                                                       |
+| **Competitive Squad Modpack**             | Community-driven modpack for organized play. Includes automatic scoreboard exports. | [Steam Workshop › Competitive Squad Modpack](https://steamcommunity.com/sharedfiles/filedetails/?id=3561863613) |
+| **Comp Skirmish (with `_caster` layers)** | Training/scrim mod that supports scoreboard export (layers ending with `_caster`).  | [Steam Workshop › Comp Skirmish](https://steamcommunity.com/sharedfiles/filedetails/?id=3294562930)             |
 
-Once you’ve joined, **open a ticket or message a developer** to request your **API key** for Squad Competification.
-
-You’ll receive a unique `apiToken` to insert into the plugin configuration.
-
----
-
-## 5) Known Mods That Generate Scoreboards
-
-> 🟡 **These mods are only required for the *DiscordScoreboard* plugin.**
-> The **SquadCompificationLink** plugin (EOS linking) works independently and is **fully supported on vanilla servers like Vinalia** — no mod required.
-
-| Mod Name                                  | Description                                                                                     | Link                                                                                                            |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **New Caster UI / OSI Scoreboard System** | Provides a live scoreboard and saves CSV data at the end of each round.                         | *(Included with most competitive servers)*                                                                      |
-| **Competitive Squad Modpack**             | Community-driven modpack for organized competitive play. Includes automatic scoreboard exports. | [Steam Workshop › Competitive Squad Modpack](https://steamcommunity.com/sharedfiles/filedetails/?id=3561863613) |
-| **Comp Skirmish (with _caster layers)**   | Training and scrim mod with scoreboard export functionality (layer names include `_caster`).    | [Steam Workshop › Comp Skirmish](https://steamcommunity.com/sharedfiles/filedetails/?id=3294562930)             |
-
-> **Note:** The scoreboard file path may differ depending on your mod or server setup.
-> Update the `scoreboardPath` in your plugin config to match where the CSV files are generated.
-
----
-
-## 6) Restart SquadJS
-
-Depending on your setup:
-
-* **pm2**
-
-  ```bash
-  pm2 restart squadjs
-  ```
-* **systemd**
-
-  ```bash
-  sudo systemctl restart squadjs
-  ```
-* **Manual**
-
-  ```bash
-  node index.js
-  ```
-
----
-
-## 7) Verify Operation
-
-### DiscordScoreboard
-
-* When a round ends, the plugin waits the configured `waitTime` (default: 5000 ms) and posts the latest CSV from your scoreboard folder to Discord.
-* Check:
-
-    * The CSV path is correct
-    * The Discord bot has permission to send messages
-    * The SquadJS process can access the scoreboard directory
-
-### SquadCompificationLink
-
-* On round end or player data events, SquadJS sends API requests to your configured endpoint.
-* Works on **both modded and vanilla servers** (including **Vinalia**).
-* Logs will show success messages if `logSuccessful` is set to `true`.
-
----
-
-## 8) Common Issues
-
-| Problem            | Cause                                         | Fix                                                                                               |
-| ------------------ | --------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Bot not posting    | Wrong channel ID or missing permissions       | Double-check Discord channel ID and bot permissions                                               |
-| CSV not found      | Incorrect scoreboard path or file permissions | Verify output path and ensure readable by SquadJS                                                 |
-| API call failing   | Missing or invalid `apiToken`                 | Join the [Squad Competification Discord](https://discord.gg/TTQTnXfRAc) and request a new API key |
-| Plugin not loading | Incorrect plugin folder structure             | Ensure plugin files are in `/opt/squadjs/plugins/` and names match their `plugin` field           |
-
----
-
-## ✅ Quick Checklist
-
-* [ ] Plugins placed in `/opt/squadjs/plugins/`
-* [ ] Discord connector configured
-* [ ] Correct `channelID` and `scoreboardPath`
-* [ ] Valid `apiToken` obtained from [Squad Competification Discord](https://discord.gg/TTQTnXfRAc)
-* [ ] SquadJS restarted without config errors
-* [ ] EOS linking verified on vanilla server (e.g. Vinalia)
-
----
+> 💡 **Tip:** The scoreboard path may vary depending on your mod or server setup.
+> Update the `"scoreboardPath"` in your config to match where your server saves the CSV files.
